@@ -7,19 +7,22 @@
  */
 
 function convertToObject(sourceString) {
-  const arrStyles = sourceString.split(';').map((str) => str.trim());
-  const arrByArrStyles = arrStyles.map((str) => {
+  const arrNamePlusValue = sourceString
+    .split(';')
+    .map((str) => str.trim())
+    .filter(Boolean);
+  const arrNameAndValue = arrNamePlusValue.map((str) => {
     const parts = str.split(':');
 
     return parts.map((part) => part.trim());
   });
-  const newObj = {};
+  const result = {};
 
-  arrByArrStyles.forEach((element) => {
-    newObj[element[0]] = element[1];
+  arrNameAndValue.forEach((element) => {
+    result[element[0]] = element[1];
   });
 
-  return newObj;
+  return result;
 }
 
 module.exports = convertToObject;
